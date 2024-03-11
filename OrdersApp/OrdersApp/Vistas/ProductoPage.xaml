@@ -2,8 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OrdersApp.Vistas.ProductoPage"
-             Title="{Binding Codigo}"
-             BackgroundColor="#E6F2E6">
+             Title="{Binding Codigo}">
 
     <ContentPage.Content>
         <StackLayout Padding="10">

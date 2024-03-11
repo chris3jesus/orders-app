@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:OrdersApp.ViewModels"
              x:Class="OrdersApp.Vistas.ProductosListPage"
-             Title="Productos"
-             BackgroundColor="#E6F2E6">
+             Title="Productos">
 
     <ContentPage.BindingContext>
         <local:ProductosListViewModel />

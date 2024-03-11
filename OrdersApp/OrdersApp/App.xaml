@@ -4,5 +4,13 @@
              x:Class="OrdersApp.App">
     <Application.Resources>
 
+        <ResourceDictionary>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="#4CAF50" />
+                <Setter Property="BarTextColor" Value="White" />
+                <Setter Property="BackgroundColor" Value="#E6F2E6" />
+            </Style>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>
