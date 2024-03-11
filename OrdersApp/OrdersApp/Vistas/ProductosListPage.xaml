@@ -1,12 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OrdersApp.Vistas.ProductosListPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+             xmlns:local="clr-namespace:OrdersApp.ViewModels"
+             x:Class="OrdersApp.Vistas.ProductosListPage"
+             Title="Productos"
+             BackgroundColor="#E6F2E6">
+
+    <ContentPage.BindingContext>
+        <local:ProductosListViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+
+        <StackLayout Padding="10">
+            <Entry Placeholder="Ingrese código o nombre de producto" Text="{Binding TextoBusqueda}" />
+            <Button Text="Buscar" Command="{Binding BuscarCommand}" BackgroundColor="#FF9800" TextColor="White" CornerRadius="5"/>
         </StackLayout>
-    </ContentPage.Content>
+
+        <ListView ItemsSource="{Binding Productos}" HasUnevenRows="True" ItemSelected="OnItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10" VerticalOptions="FillAndExpand">
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Código: " FontAttributes="Bold"/>
+                                        <Span Text="{Binding Codigo}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label Text="{Binding Descripcion}" />
+                            <Label Text="{Binding Marca}" />
+                            <Label Text="{Binding Precio, StringFormat='Precio: {0:S/ 0.00}'}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
 </ContentPage>
