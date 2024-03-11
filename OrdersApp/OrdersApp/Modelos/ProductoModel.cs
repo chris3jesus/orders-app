@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OrdersApp.Modelos
 {
-    class ProductoModel
+    public class ProductoModel
     {
         public int Codigo { get; set; }
         public string Descripcion { get; set; }
