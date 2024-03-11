@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrdersApp.Vistas.ProductoPage"
+             Title="{Binding Codigo}"
+             BackgroundColor="#E6F2E6">
+
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Text="{Binding Descripcion}" FontAttributes="Bold"/>
+            <Label Text="{Binding Presentacion}" />
+            <Label Text="{Binding Marca}" />
+
+            <Label Text="{Binding Precio, StringFormat='Precio: {0:S/ 0.00}'}" />
+            <Label Text="{Binding Stock}" />
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
