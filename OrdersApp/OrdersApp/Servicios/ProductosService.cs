@@ -10,7 +10,7 @@ namespace OrdersApp.Servicios
 {
     public class ProductosService
     {
-        private const string Url = "http://localhost:3000/productos";
+        private const string Url = "http://10.0.2.2:5077/api/productos";
 
         public async Task<List<ProductoModel>> ObtenerProductos()
         {
@@ -45,7 +45,7 @@ namespace OrdersApp.Servicios
             {
                 using (var client = new HttpClient())
                 {
-                    var url = $"http://localhost:3000/productos?q={textoBusqueda}";
+                    var url = $"{Url}/{textoBusqueda}";
                     var response = await client.GetAsync(url);
                     if (response.IsSuccessStatusCode)
                     {

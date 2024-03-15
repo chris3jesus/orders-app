@@ -25,15 +25,15 @@ namespace OrdersApp.ViewModels
         public ProductosListViewModel()
         {
             // Aquí normalmente cargarías los datos de productos desde tu servicio o repositorio
-            //Productos = new ObservableCollection<ProductoModel>
-            //{
-            //    new ProductoModel { Codigo = 2725648, Descripcion = "ELECTROLIGHT MORA", Marca = "Medifarma", Presentacion = "FCOX475ML", Precio = 2.2034m },
-            //    new ProductoModel { Codigo = 2725645, Descripcion = "ABRILAR EA 575 35MG/5ML JARABE", Marca = "Megalabs", Presentacion = "FCOX100ML", Precio = 49.6600m },
-            //    new ProductoModel { Codigo = 2726073, Descripcion = "REDOXON TOTAL COMPRIMIDOS RECUBIERTO", Marca = "Bayer", Presentacion = "CJAX10", Precio = 8.7000m },
-            //};
+            // Productos = new ObservableCollection<ProductoModel>
+            // {
+            // new ProductoModel { Codigo = 2725648, Descripcion = "ELECTROLIGHT MORA", Marca = "Medifarma", Presentacion = "FCOX475ML", Precio = 2.2034m },
+            // new ProductoModel { Codigo = 2725645, Descripcion = "ABRILAR EA 575 35MG/5ML JARABE", Marca = "Megalabs", Presentacion = "FCOX100ML", Precio = 49.6600m },
+            // new ProductoModel { Codigo = 2726073, Descripcion = "REDOXON TOTAL COMPRIMIDOS RECUBIERTO", Marca = "Bayer", Presentacion = "CJAX10", Precio = 8.7000m },
+            // };
 
             _productosService = new ProductosService();
-            CargarProductos();
+            // CargarProductos();
 
             Productos = new ObservableCollection<ProductoModel>();
             BuscarCommand = new Command(async () => await BuscarProductos());
