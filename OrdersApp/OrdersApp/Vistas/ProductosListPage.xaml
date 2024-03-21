@@ -21,17 +21,41 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout Padding="10" VerticalOptions="FillAndExpand">
-                            <Label>
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="Código: " FontAttributes="Bold"/>
-                                        <Span Text="{Binding Codigo}"/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <Label Text="{Binding Descripcion}" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Código: " FontAttributes="Bold" />
+                                            <Span Text="{Binding Codigo}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Stock disponible: " FontAttributes="Bold" />
+                                            <Span Text="{Binding Stock}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </Grid>
+
                             <Label Text="{Binding Marca}" />
-                            <Label Text="{Binding Precio, StringFormat='Precio: {0:S/ 0.00}'}" />
+                            <Label Text="{Binding Descripcion}" />
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding Presentacion}" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" />
+                                <Label Text="{Binding Precio, StringFormat='Precio: {0:S/ 0.00}'}" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" />
+                            </Grid>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
