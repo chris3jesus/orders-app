@@ -1,4 +1,4 @@
-﻿using OrdersApp.Vistas;
+﻿using OrdersApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,24 +14,10 @@ namespace OrdersApp
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new MainPageViewModel();
 
-            CodigoEntry.Text = "999";
-            ClaveEntry.Text = "prueba";
-        }
-
-        private async void OnLoginButtonClicked(object sender, EventArgs e)
-        {
-            string codigo = CodigoEntry.Text;
-            string clave = ClaveEntry.Text;
-
-            if (codigo == "999" && clave == "prueba")
-            {
-                await Navigation.PushAsync(new MenuPage(codigo));
-            }
-            else
-            {
-                await DisplayAlert("Error", "Datos incorrectos", "Aceptar");
-            }
+            CodigoEntry.Text = "46";
+            ClaveEntry.Text = "123456";
         }
     }
 }
