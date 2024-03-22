@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OrdersApp.Modelos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -24,9 +25,9 @@ namespace OrdersApp.ViewModels
             }
         }
 
-        public MenuPageViewModel(string codigoVendedor)
+        public MenuPageViewModel(VendedorModel vendedor)
         {
-            WelcomeMessage = $"Bienvenido {codigoVendedor}";
+            WelcomeMessage = $"Bienvenido {vendedor.Nombre} ({vendedor.Codigo})";
         }
     }
 }
