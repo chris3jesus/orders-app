@@ -3,14 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OrdersApp.MainPage"
              Title="Pedidos">
-
     <ContentPage.Content>
         <StackLayout VerticalOptions="CenterAndExpand" Padding="20">
-            <Image Source="koala_logo.png" HorizontalOptions="Center" HeightRequest="100" WidthRequest="100" Margin="0,0,0,20"/>
-            <Entry Placeholder="Código Vendedor" Keyboard="Numeric" Margin="0,0,0,10" x:Name="CodigoEntry"/>
-            <Entry Placeholder="Clave" IsPassword="True" Margin="0,0,0,20" x:Name="ClaveEntry"/>
-            <Button Text="Iniciar Sesión" BackgroundColor="#4CAF50" TextColor="White" Clicked="OnLoginButtonClicked" CornerRadius="5"/>
+            <Image Source="koala_logo.png" HorizontalOptions="Center" HeightRequest="100" WidthRequest="100" Margin="0,0,0,20" />
+            <Entry Placeholder="Código Vendedor" Keyboard="Numeric" Margin="0,0,0,10" x:Name="CodigoEntry" Text="{Binding Codigo}" />
+            <Entry Placeholder="Clave" IsPassword="True" Margin="0,0,0,20" x:Name="ClaveEntry" Text="{Binding Clave}" />
+            <Button Text="Iniciar Sesión" BackgroundColor="#4CAF50" TextColor="White" Command="{Binding LoginCommand}" CornerRadius="5" />
         </StackLayout>
     </ContentPage.Content>
-
 </ContentPage>
