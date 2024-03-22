@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrdersApp.Vistas.Clientes.ClientePage"
+             Title="{Binding Codigo}">
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Text="{Binding Documento, StringFormat='Documento: {0}'}" FontAttributes="Bold" />
+            <Label Text="{Binding Razon}" />
+            <Label Text="{Binding Comercial}" />
+            <Label Text="{Binding Nombre}" />
+            <Label Text="{Binding Vendedor, StringFormat='Código vendedor: {0}'}" />
+
+            <Label Text="Direcciones:" FontAttributes="Bold" />
+
+            <ListView ItemsSource="{Binding Direcciones}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10" VerticalOptions="FillAndExpand">
+                                <Label Text="{Binding Codigo, StringFormat='Código dirección: {0}'}" FontAttributes="Bold" />
+                                <Label Text="{Binding Direccion}" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Distrito}" />
+                                    <Label Text="/" />
+                                    <Label Text="{Binding Provincia}" />
+                                    <Label Text="/" />
+                                    <Label Text="{Binding Departamento}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
