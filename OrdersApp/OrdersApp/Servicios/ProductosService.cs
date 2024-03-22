@@ -10,9 +10,7 @@ namespace OrdersApp.Servicios
 {
     public class ProductosService
     {
-        // private const string Url = "http://10.0.2.2:5077/api/productos";
-
-        private const string Host = "https://4285-190-119-127-10.ngrok-free.app";
+        private const string Host = "http://10.0.2.2:5077";
         private const string Url = Host + "/api/productos";
 
         public async Task<List<ProductoModel>> ObtenerProductos()
