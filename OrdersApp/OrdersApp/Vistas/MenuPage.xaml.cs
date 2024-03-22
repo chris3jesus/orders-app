@@ -1,4 +1,6 @@
-﻿using OrdersApp.ViewModels;
+﻿using OrdersApp.Modelos;
+using OrdersApp.ViewModels;
+using OrdersApp.Vistas.Pedidos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +15,15 @@ namespace OrdersApp.Vistas
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuPage : ContentPage
     {
-        public MenuPage(string codigoVendedor)
+        public MenuPage(VendedorModel vendedor)
         {
             InitializeComponent();
-            BindingContext = new MenuPageViewModel(codigoVendedor);
+            BindingContext = new MenuPageViewModel(vendedor);
         }
 
         private async void OnPedidosButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new PedidosListPage());
+            await Navigation.PushAsync(new PedidosMainPage());
         }
 
         private async void OnClientesButtonClicked(object sender, EventArgs e)
