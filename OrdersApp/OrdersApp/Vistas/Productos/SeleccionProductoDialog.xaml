@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrdersApp.Vistas.Productos.SeleccionProductoDialog"
+             BackgroundColor="#E6F2E6">
+    <StackLayout Padding="10">
+        <Label Text="AGREGAR PRODUCTO" FontAttributes="Bold" />
+        <Label Text="{Binding Codigo, StringFormat='Código: {0}'}" />
+        <Label Text="{Binding Descripcion}" />
+        <Label Text="{Binding Presentacion, StringFormat='Presentación: {0}'}" />
+        <Label Text="{Binding Marca, StringFormat='Marca: {0}'}" />
+        <Label Text="{Binding Stock, StringFormat='Stock: {0}'}" />
+        <Label Text="{Binding Precio, StringFormat='Precio: {0:S/ 0.00}'}" />
+
+        <Grid Padding="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Cantidad:" VerticalOptions="Center" />
+            <Entry Grid.Column="1" Placeholder="Ingrese cantidad" x:Name="cantidadEntry" Keyboard="Numeric" />
+
+            <Label Grid.Row="1" Text="Descuento 1:" VerticalOptions="Center" />
+            <Entry Grid.Row="1" Grid.Column="1" Placeholder="Ingrese descuento 1" x:Name="dscto1Entry" Text="0.00" Keyboard="Numeric" IsReadOnly="True" />
+
+            <Label Grid.Row="2" Text="Descuento 2:" VerticalOptions="Center" />
+            <Entry Grid.Row="2" Grid.Column="1" Placeholder="Ingrese descuento 2" x:Name="dscto2Entry" Text="0.00" Keyboard="Numeric" IsReadOnly="True" />
+        </Grid>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Label Text="Subtotal:" FontAttributes="Bold" />
+            <Label x:Name="lblSubtotal" />
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Label Text="Total:" FontAttributes="Bold" />
+            <Label x:Name="lblTotal" />
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+            <Button Text="Aceptar" Clicked="Aceptar_Clicked" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" />
+            <Button Text="Cancelar" Clicked="Cancelar_Clicked" BackgroundColor="#FF9800" TextColor="White" CornerRadius="5" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>
