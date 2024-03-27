@@ -23,7 +23,9 @@ namespace OrdersApp.Vistas
 
         private async void OnPedidosButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new PedidosMainPage());
+            var menuPageViewModel = (MenuPageViewModel)BindingContext;
+            var vendedor = menuPageViewModel.Vendedor;
+            await Navigation.PushAsync(new PedidosMainPage(vendedor));
         }
 
         private async void OnClientesButtonClicked(object sender, EventArgs e)
