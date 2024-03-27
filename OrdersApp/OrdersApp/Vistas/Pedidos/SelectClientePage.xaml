@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:OrdersApp.ViewModels"
+             x:Class="OrdersApp.Vistas.Pedidos.SelectClientePage"
+             Title="{Binding Vendedor.Codigo, StringFormat='Cliente pedido ({0})'}">
+
+    <ContentPage.BindingContext>
+        <local:SelectClienteViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <StackLayout Padding="10">
+            <Label Text="{Binding Vendedor.Nombre, StringFormat='Vendedor: {0}'}" />
+            <Entry Placeholder="Ingrese código / doc. / nombre de cliente" Text="{Binding TextoBusqueda}" />
+            <Button Text="Buscar" Command="{Binding BuscarCommand}" BackgroundColor="#FF9800" TextColor="White" CornerRadius="5" />
+        </StackLayout>
+
+        <ListView ItemsSource="{Binding Clientes}" HasUnevenRows="True" ItemSelected="OnItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10" VerticalOptions="FillAndExpand">
+                            <Label Text="{Binding Documento, StringFormat='RUC / DNI: {0}'}" FontAttributes="Bold" />
+                            <Label Text="{Binding Comercial}" />
+                            <Label Text="{Binding Razon}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+</ContentPage>
