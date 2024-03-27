@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrdersApp.Vistas.Pedidos.SelectProductoPage"
+            BarBackgroundColor="#2196F3"
+            Title="Pedido">
+    <ContentPage Title="Cliente">
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Label Text="{Binding Pedido.Estado}" HorizontalOptions="Center" />
+                <Label Text="{Binding Ubicacion}" HorizontalOptions="Center" />
+                <Label Text="{Binding Pedido.FechaReg}" HorizontalOptions="Center" />
+                <Label Text="PEDIDO" FontAttributes="Bold" />
+                <Picker x:Name="formaPagoPicker" Title="Seleccionar Forma de Pago" SelectedIndexChanged="FormaPagoPicker_SelectedIndexChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Contado</x:String>
+                            <!-- <x:String>Crédito</x:String> -->
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <!-- <Label Text="Días crédito: 1" /> -->
+                <Picker Title="Seleccionar Tipo de Documento" SelectedIndexChanged="TipoDocPicker_SelectedIndexChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Factura</x:String>
+                            <x:String>Boleta</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Label Text="CLIENTE" FontAttributes="Bold" />
+                <Label Text="{Binding Cliente.Documento, StringFormat='RUC / DNI: {0}'}" />
+                <Label Text="{Binding Cliente.Comercial}" />
+                <Label Text="{Binding Cliente.Razon}" />
+                <Picker Title="Seleccionar Dirección" ItemsSource="{Binding Cliente.Direcciones}" SelectedIndexChanged="DireccionPicker_SelectedIndexChanged">
+                    <Picker.ItemDisplayBinding>
+                        <Binding Path="Direccion"/>
+                    </Picker.ItemDisplayBinding>
+                </Picker>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                    <CheckBox x:Name="fleteCheckBox" CheckedChanged="FleteCheckBox_CheckedChanged" />
+                    <Label Text="Flete" VerticalOptions="Center" />
+                </StackLayout>
+                <Editor Text="{Binding Observacion}" Placeholder="Observaciones" AutoSize="TextChanges" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+
+    <ContentPage Title="Detalle" >
+        <StackLayout Padding="10" VerticalOptions="FillAndExpand">
+            <Grid BackgroundColor="LightBlue">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Text="Código" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                <Label Grid.Row="0" Grid.Column="1" Text="Producto" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                <Label Grid.Row="0" Grid.Column="2" Text="Cantidad" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                <Label Grid.Row="0" Grid.Column="3" Text="Precio (S/)" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                <Label Grid.Row="0" Grid.Column="4" Text="Subtotal (S/)" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+            </Grid>
+
+            <ListView ItemsSource="{Binding Detalles}" HasUnevenRows="True" VerticalOptions="FillAndExpand">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding Producto.Codigo}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="{Binding Producto.Descripcion}" HorizontalOptions="Start" VerticalOptions="Center" />
+                                <Label Grid.Column="2" Text="{Binding Cantidad}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <Label Grid.Column="3" Text="{Binding Producto.Precio, StringFormat='{0: 0.00}'}" HorizontalOptions="Start" VerticalOptions="Center" />
+                                <Label Grid.Column="4" Text="{Binding SubtotalLb, StringFormat='{0: 0.00}'}" HorizontalOptions="Center" VerticalOptions="Center" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout>
+                <Label Text="{Binding Total, StringFormat='Total: S/{0: 0.00}'}" HorizontalOptions="End" />
+                <Button Text="Registrar" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" Command="{Binding RegistrarPedidoCommand}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage>
+
+    <ContentPage Title="Productos">
+        <StackLayout>
+            <StackLayout Padding="10">
+                <Entry Placeholder="Ingrese código o nombre de producto" Text="{Binding TextoBusqueda}" />
+                <Button Text="Buscar" Command="{Binding BuscarCommand}" BackgroundColor="#FF9800" TextColor="White" CornerRadius="5"/>
+            </StackLayout>
+
+            <ListView ItemsSource="{Binding Productos}" HasUnevenRows="True" ItemSelected="OnItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10" VerticalOptions="FillAndExpand">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Código: " FontAttributes="Bold" />
+                                                <Span Text="{Binding Codigo}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Stock disponible: " FontAttributes="Bold" />
+                                                <Span Text="{Binding Stock}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+
+                                <Label Text="{Binding Marca}" />
+                                <Label Text="{Binding Descripcion}" />
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding Presentacion}" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" />
+                                    <Label Text="{Binding Precio, StringFormat='Precio: {0:S/ 0.00}'}" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" />
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>
