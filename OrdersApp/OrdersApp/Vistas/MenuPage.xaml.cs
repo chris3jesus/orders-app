@@ -30,7 +30,9 @@ namespace OrdersApp.Vistas
 
         private async void OnClientesButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ClientesListPage());
+            var menuPageViewModel = (MenuPageViewModel)BindingContext;
+            var vendedor = menuPageViewModel.Vendedor;
+            await Navigation.PushAsync(new ClientesListPage(vendedor));
         }
 
         private async void OnProductosButtonClicked(object sender, EventArgs e)
