@@ -31,6 +31,19 @@ namespace OrdersApp.ViewModels
             SeleccionarClienteCommand = new Command<ClienteModel>(async (cliente) => await SeleccionarCliente(cliente));
         }
 
+        private VendedorModel _vendedor;
+
+        public VendedorModel Vendedor
+        {
+            get { return _vendedor; }
+            set { _vendedor = value; OnPropertyChanged(nameof(Vendedor)); }
+        }
+
+        public ClientesListViewModel(VendedorModel vendedor) : this()
+        {
+            Vendedor = vendedor;
+        }
+
         private async Task BuscarClientes()
         {
             var clientes = await _clientesService.BuscarClientes(TextoBusqueda);
