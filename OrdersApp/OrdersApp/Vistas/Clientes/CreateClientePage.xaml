@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrdersApp.Vistas.Clientes.CreateClientePage"
+             Title="Nuevo cliente">
+    <ContentPage.Content>
+        <StackLayout Margin="20">
+            <Label Text="RUC / DNI:" />
+            <Entry Placeholder="Documento" Text="{Binding NumeroDocumento}" Keyboard="Numeric" />
+
+            <Label Text="Nombre / Razón social:" />
+            <Entry Placeholder="Razón" Text="{Binding Nombre}" />
+
+            <Label Text="Nombre Comercial:" />
+            <Entry Placeholder="Comercial" Text="{Binding NombreComercial}" />
+
+            <Label Text="Dirección:" />
+            <Entry Placeholder="Dirección" Text="{Binding Direccion}" />
+
+            <Label Text="{Binding Vendedor.Nombre, StringFormat='Vendedor: {0}'}" HorizontalOptions="Center" />
+            <Button Text="Registrar" Command="{Binding RegistrarCommand}" Margin="0,10,0,0" BackgroundColor="#2196F3" TextColor="White" CornerRadius="5" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
