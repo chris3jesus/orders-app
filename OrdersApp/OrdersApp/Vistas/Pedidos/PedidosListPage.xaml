@@ -1,12 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="OrdersApp.Vistas.PedidosListPage">
+             x:Class="OrdersApp.Vistas.PedidosListPage"
+             Title="[FECHA]">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="10">
+            <Label Text="{Binding Vendedor.Nombre, StringFormat='Vendedor: {0}'}" HorizontalOptions="Center" />
+            <Label Text="{Binding Total, StringFormat='Total: S/ {0}'}" HorizontalOptions="Center" />
+            <Label Text="{Binding NPedidos, StringFormat='N.º Pedidos: {0}'}" HorizontalOptions="Center" />
+
+            <ListView ItemsSource="{Binding Pedidos}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Codigo, StringFormat='Código: {0}'}" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+                                    <Label Text="{Binding CondPago}" HorizontalOptions="End" FontAttributes="Bold" />
+                                    <Label Text="{Binding TipoDoc}" HorizontalOptions="End" FontAttributes="Bold" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding FechaReg}" HorizontalOptions="StartAndExpand" />
+                                    <Label Text="{Binding Estado}" HorizontalOptions="EndAndExpand" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding CodCli, StringFormat='Cliente: {0}'}" HorizontalOptions="StartAndExpand" />
+                                    <Label Text="{Binding Total, StringFormat='Total: S/ {0}'}" HorizontalOptions="EndAndExpand" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
