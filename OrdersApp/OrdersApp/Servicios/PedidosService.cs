@@ -41,5 +41,31 @@ namespace OrdersApp.Servicios
                 return false;
             }
         }
+
+        public async Task<List<PedidosModel>> ObtenerPedidos(int vendedor)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var url = $"{Url}/v/{vendedor}";
+                    var response = await client.GetAsync(url);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var content = await response.Content.ReadAsStringAsync();
+                        return JsonConvert.DeserializeObject<List<PedidosModel>>(content);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error al buscar pedidos: " + response.StatusCode);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return null;
+        }
     }
 }
