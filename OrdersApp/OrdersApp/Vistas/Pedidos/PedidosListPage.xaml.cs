@@ -20,5 +20,14 @@ namespace OrdersApp.Vistas
             BindingContext = new PedidosListViewModel(vendedor);
             Title = DateTime.Now.ToString("dd/MM/yyyy");
         }
+
+        private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null) return;
+            var viewModel = BindingContext as PedidosListViewModel;
+            var selectedPedido = e.SelectedItem as PedidosModel;
+            viewModel?.SeleccionarPedidoCommand.Execute(selectedPedido);
+            ((ListView)sender).SelectedItem = null;
+        }
     }
 }

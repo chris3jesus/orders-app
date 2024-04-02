@@ -9,7 +9,7 @@
             <Label Text="{Binding Total, StringFormat='Total: S/ {0}'}" HorizontalOptions="Center" />
             <Label Text="{Binding NPedidos, StringFormat='N.º Pedidos: {0}'}" HorizontalOptions="Center" />
 
-            <ListView ItemsSource="{Binding Pedidos}" HasUnevenRows="True">
+            <ListView ItemsSource="{Binding Pedidos}" HasUnevenRows="True" ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
