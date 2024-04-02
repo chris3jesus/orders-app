@@ -86,7 +86,7 @@ namespace OrdersApp.Vistas.Productos
                 return;
             }
 
-            decimal subtotal = Math.Round(_producto.Precio * 1.18m, 4);
+            decimal subtotal = Math.Round(_producto.Precio, 4);
 
             decimal descuento1Amount = Math.Round(subtotal * (descuento1 / 100m), 4);
             decimal descuento2Amount = Math.Round(subtotal * (descuento2 / 100m), 4);
