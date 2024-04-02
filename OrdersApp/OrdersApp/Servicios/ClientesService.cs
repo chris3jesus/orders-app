@@ -13,13 +13,13 @@ namespace OrdersApp.Servicios
         private const string Host = "http://10.0.2.2:5077";
         private const string Url = Host + "/api/clientes";
 
-        public async Task<List<ClienteModel>> BuscarClientes(string textoBusqueda)
+        public async Task<List<ClienteModel>> BuscarClientes(int vendedor, string textoBusqueda)
         {
             try
             {
                 using (var client = new HttpClient())
                 {
-                    var url = $"{Url}/{textoBusqueda}";
+                    var url = $"{Url}/{vendedor}/{textoBusqueda}";
                     var response = await client.GetAsync(url);
                     if (response.IsSuccessStatusCode)
                     {

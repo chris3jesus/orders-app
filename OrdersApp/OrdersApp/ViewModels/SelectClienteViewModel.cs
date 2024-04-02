@@ -51,7 +51,7 @@ namespace OrdersApp.ViewModels
 
         private async Task BuscarClientes()
         {
-            var clientes = await _clientesService.BuscarClientes(TextoBusqueda);
+            var clientes = await _clientesService.BuscarClientes(Int32.Parse(Vendedor.Codigo), TextoBusqueda);
             if (clientes != null)
             {
                 Clientes.Clear();
