@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrdersApp.Vistas.Pedidos.PedidoPage"
+             Title="{Binding Codigo}">
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Estado, StringFormat='Estado: {0}'}" HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
+                <Label Text="{Binding FechaReg}" HorizontalOptions="EndAndExpand" FontAttributes="Bold" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding CondPago, StringFormat='Condición de pago: {0}'}" HorizontalOptions="StartAndExpand" />
+                <Label Text="{Binding TipoDoc, StringFormat='Tipo de documento: {0}'}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding CodCli, StringFormat='Cliente: {0}'}" HorizontalOptions="StartAndExpand" />
+                <Label Text="{Binding IdDirCli, StringFormat='Dirección: {0}'}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout>
+                <Label Text="{Binding Observ, StringFormat='Observación: {0}'}" />
+                <Label Text="{Binding Flete, StringFormat='Flete: {0}'}" />
+            </StackLayout>
+
+            <StackLayout>
+                <Grid BackgroundColor="LightBlue">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="Producto" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="Cantidad" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                    <Label Grid.Row="0" Grid.Column="2" Text="Precio (S/)" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                    <Label Grid.Row="0" Grid.Column="3" Text="Subtotal (S/)" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                </Grid>
+
+                <ListView ItemsSource="{Binding DetPedidos}" HasUnevenRows="True" VerticalOptions="FillAndExpand">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Column="0" Text="{Binding IdProd}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Label Grid.Column="1" Text="{Binding Cantidad}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Label Grid.Column="2" Text="{Binding PrecDscto, StringFormat='{0: 0.00}'}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Label Grid.Column="3" Text="{Binding Total}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Subtotal, StringFormat='Subtotal: S/ {0}'}" HorizontalOptions="StartAndExpand" />
+                <Label Text="{Binding Igv, StringFormat='IGV (18%): S/ {0}'}" HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <StackLayout>
+                <Label Text="{Binding Total, StringFormat='Total: S/ {0}'}" HorizontalOptions="End" />
+                <Button Text="Editar" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
