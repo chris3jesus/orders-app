@@ -2,24 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="OrdersApp.Vistas.Pedidos.PedidoPage"
-             Title="{Binding Codigo}">
+             Title="{Binding Pedido.Codigo}">
     <ContentPage.Content>
         <StackLayout Padding="10">
             <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Estado, StringFormat='Estado: {0}'}" HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
-                <Label Text="{Binding FechaReg}" HorizontalOptions="EndAndExpand" FontAttributes="Bold" />
+                <Label Text="{Binding Pedido.Estado, StringFormat='Estado: {0}'}" HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
+                <Label Text="{Binding Pedido.FechaReg}" HorizontalOptions="EndAndExpand" FontAttributes="Bold" />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding CondPago, StringFormat='Condición de pago: {0}'}" HorizontalOptions="StartAndExpand" />
-                <Label Text="{Binding TipoDoc, StringFormat='Tipo de documento: {0}'}" HorizontalOptions="EndAndExpand" />
+                <Label Text="{Binding Pedido.CondPago, StringFormat='Condición de pago: {0}'}" HorizontalOptions="StartAndExpand" />
+                <Label Text="{Binding Pedido.TipoDoc, StringFormat='Tipo de documento: {0}'}" HorizontalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding CodCli, StringFormat='Cliente: {0}'}" HorizontalOptions="StartAndExpand" />
-                <Label Text="{Binding IdDirCli, StringFormat='Dirección: {0}'}" HorizontalOptions="EndAndExpand" />
+                <Label Text="{Binding Pedido.CodCli, StringFormat='Cliente: {0}'}" HorizontalOptions="StartAndExpand" />
+                <Label Text="{Binding Pedido.IdDirCli, StringFormat='Dirección: {0}'}" HorizontalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout>
-                <Label Text="{Binding Observ, StringFormat='Observación: {0}'}" />
-                <Label Text="{Binding Flete, StringFormat='Flete: {0}'}" />
+                <Label Text="{Binding Pedido.Observ, StringFormat='Observación: {0}'}" />
+                <Label Text="{Binding Pedido.Flete, StringFormat='Flete: {0}'}" />
             </StackLayout>
 
             <StackLayout>
@@ -39,7 +39,7 @@
                     <Label Grid.Row="0" Grid.Column="3" Text="Subtotal (S/)" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
                 </Grid>
 
-                <ListView ItemsSource="{Binding DetPedidos}" HasUnevenRows="True" VerticalOptions="FillAndExpand">
+                <ListView ItemsSource="{Binding Pedido.DetPedidos}" HasUnevenRows="True" VerticalOptions="FillAndExpand">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -62,12 +62,12 @@
             </StackLayout>
 
             <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Subtotal, StringFormat='Subtotal: S/ {0}'}" HorizontalOptions="StartAndExpand" />
-                <Label Text="{Binding Igv, StringFormat='IGV (18%): S/ {0}'}" HorizontalOptions="EndAndExpand" />
+                <Label Text="{Binding Pedido.Subtotal, StringFormat='Subtotal: S/ {0}'}" HorizontalOptions="StartAndExpand" />
+                <Label Text="{Binding Pedido.Igv, StringFormat='IGV (18%): S/ {0}'}" HorizontalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout>
-                <Label Text="{Binding Total, StringFormat='Total: S/ {0}'}" HorizontalOptions="End" />
-                <Button Text="Editar" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" />
+                <Label Text="{Binding Pedido.Total, StringFormat='Total: S/ {0}'}" HorizontalOptions="End" />
+                <Button Text="Editar" Clicked="OnUpdateButtonClicked" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

@@ -1,4 +1,5 @@
 ﻿using OrdersApp.Modelos;
+using OrdersApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,14 @@ namespace OrdersApp.Vistas.Pedidos
         public PedidoPage(PedidosModel pedidos)
         {
             InitializeComponent();
-            BindingContext = pedidos;
+            BindingContext = new PedidoPageViewModel(pedidos);
+        }
+
+        private async void OnUpdateButtonClicked(object sender, EventArgs e)
+        {
+            var pedidoPageViewModel = (PedidoPageViewModel)BindingContext;
+            var pedido = pedidoPageViewModel.Pedido;
+            await Navigation.PushAsync(new UpdatePedidoPage(pedido));
         }
     }
 }
