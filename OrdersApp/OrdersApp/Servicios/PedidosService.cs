@@ -67,5 +67,33 @@ namespace OrdersApp.Servicios
             }
             return null;
         }
+
+        public async Task<bool> EditarPedido(PedidosModel pedido)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    string pedidoJson = JsonConvert.SerializeObject(pedido);
+                    var url = $"{Url}/{pedido.Id}";
+                    HttpResponseMessage response = await client.PutAsync(url, new StringContent(pedidoJson, Encoding.UTF8, "application/json"));
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"La solicitud PUT no fue exitosa. Estado: {response.StatusCode}");
+                        Console.WriteLine(pedidoJson);
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error al editar el pedido: " + ex.Message);
+                return false;
+            }
+        }
     }
 }
