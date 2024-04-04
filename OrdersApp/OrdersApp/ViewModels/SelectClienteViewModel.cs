@@ -60,6 +60,10 @@ namespace OrdersApp.ViewModels
                     Clientes.Add(cliente);
                 }
             }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Mensaje", "No se encontraron clientes del vendedor con el parámetro de búsqueda.", "Aceptar");
+            }
         }
 
         private async Task SeleccionarCliente(ClienteModel cliente)

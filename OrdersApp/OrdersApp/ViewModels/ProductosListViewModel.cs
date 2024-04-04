@@ -62,6 +62,10 @@ namespace OrdersApp.ViewModels
                     Productos.Add(producto);
                 }
             }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Mensaje", "No se encontraron productos con el parámetro de búsqueda.", "Aceptar");
+            }
         }
 
         private async Task SeleccionarProducto(ProductoModel producto)
