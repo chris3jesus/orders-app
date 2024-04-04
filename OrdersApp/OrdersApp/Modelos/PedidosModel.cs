@@ -34,7 +34,7 @@ namespace OrdersApp.Modelos
         public int Id { get; set; }
         public int IdPed { get; set; }
         public int Item { get; set; }
-        public int IdProd { get; set; }
+        public string IdProd { get; set; }
         public int Cantidad { get; set; }
         public decimal Valor { get; set; }
         public decimal Precio { get; set; }

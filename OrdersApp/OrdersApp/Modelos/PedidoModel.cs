@@ -23,7 +23,7 @@ namespace OrdersApp.Modelos
 
     public class DetallePedidoModel
     {
-        public int IdProd { get; set; }
+        public string IdProd { get; set; }
         public int Cantidad { get; set; }
         public decimal Dscto1 { get; set; }
         public decimal Dscto2 { get; set; }
