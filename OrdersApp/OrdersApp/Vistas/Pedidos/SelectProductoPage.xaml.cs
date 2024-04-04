@@ -20,6 +20,16 @@ namespace OrdersApp.Vistas.Pedidos
             BindingContext = new SelectProductoViewModel(vendedor, cliente);
 
             formaPagoPicker.SelectedIndex = 0;
+
+            if (cliente.Documento.Length == 11)
+            {
+                tipoDocPicker.SelectedIndex = 0;
+            }
+
+            if (cliente.Documento.Length == 8)
+            {
+                tipoDocPicker.SelectedIndex = 1;
+            }
         }
 
         private void FormaPagoPicker_SelectedIndexChanged(object sender, EventArgs e)

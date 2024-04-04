@@ -20,7 +20,7 @@
                     </Picker.ItemsSource>
                 </Picker>
                 <!-- <Label Text="Días crédito: 1" /> -->
-                <Picker Title="Seleccionar Tipo de Documento" SelectedIndexChanged="TipoDocPicker_SelectedIndexChanged">
+                <Picker x:Name="tipoDocPicker" Title="Seleccionar Tipo de Documento" SelectedIndexChanged="TipoDocPicker_SelectedIndexChanged">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
                             <x:String>Factura</x:String>
