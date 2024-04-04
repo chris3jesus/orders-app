@@ -5,7 +5,7 @@
              Title="{Binding Codigo}">
     <ContentPage.Content>
         <StackLayout Padding="10">
-            <Label Text="{Binding Documento, StringFormat='Documento: {0}'}" FontAttributes="Bold" />
+            <Label Text="{Binding Documento, StringFormat='RUC / DNI: {0}'}" FontAttributes="Bold" />
             <Label Text="{Binding Razon}" />
             <Label Text="{Binding Comercial}" />
             <Label Text="{Binding Nombre}" />
@@ -18,7 +18,9 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10" VerticalOptions="FillAndExpand">
+                                <!--
                                 <Label Text="{Binding Codigo, StringFormat='Código dirección: {0}'}" FontAttributes="Bold" />
+                                -->
                                 <Label Text="{Binding Direccion}" />
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Distrito}" />

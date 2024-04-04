@@ -21,7 +21,7 @@
                     <ViewCell>
                         <StackLayout Padding="10" VerticalOptions="FillAndExpand">
                             <Label Text="{Binding Codigo, StringFormat='Código: {0}'}" FontAttributes="Bold" />
-                            <Label Text="{Binding Documento, StringFormat='Documento: {0}'}" />
+                            <Label Text="{Binding Documento, StringFormat='RUC / DNI: {0}'}" />
                             <Label Text="{Binding Razon}" />
                             <Label Text="{Binding Comercial}" />
                         </StackLayout>
