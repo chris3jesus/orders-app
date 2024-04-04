@@ -12,7 +12,7 @@ namespace OrdersApp.Modelos
         public int DiasCred { get; set; } = 1;
         public string TipoDoc { get; set; }
         public DateTime FechaReg { get; } = DateTime.Now;
-        public string Estado { get; set; } = "Nuevo";
+        public string Estado { get; set; } = "Nuevo pedido";
         public int IdDirCli { get; set; }
         public double Latitud { get; set; }
         public double Longitud { get; set; }
