@@ -53,7 +53,7 @@
                                     <Label Grid.Column="0" Text="{Binding IdProd}" HorizontalOptions="Center" VerticalOptions="Center" />
                                     <Label Grid.Column="1" Text="{Binding Cantidad}" HorizontalOptions="Center" VerticalOptions="Center" />
                                     <Label Grid.Column="2" Text="{Binding PrecDscto, StringFormat='{0: 0.00}'}" HorizontalOptions="Center" VerticalOptions="Center" />
-                                    <Label Grid.Column="3" Text="{Binding Total}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Label Grid.Column="3" Text="{Binding Total, StringFormat='{0:#,0.00}'}" HorizontalOptions="Center" VerticalOptions="Center" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
@@ -62,11 +62,11 @@
             </StackLayout>
 
             <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Pedido.Subtotal, StringFormat='Subtotal: S/ {0}'}" HorizontalOptions="StartAndExpand" />
-                <Label Text="{Binding Pedido.Igv, StringFormat='IGV (18%): S/ {0}'}" HorizontalOptions="EndAndExpand" />
+                <Label Text="{Binding Pedido.Subtotal, StringFormat='Subtotal: S/ {0:#,0.00}'}" HorizontalOptions="StartAndExpand" />
+                <Label Text="{Binding Pedido.Igv, StringFormat='IGV (18%): S/ {0:#,0.00}'}" HorizontalOptions="EndAndExpand" />
             </StackLayout>
             <StackLayout>
-                <Label Text="{Binding Pedido.Total, StringFormat='Total: S/ {0}'}" HorizontalOptions="End" />
+                <Label Text="{Binding Pedido.Total, StringFormat='Total: S/ {0:#,0.00}'}" HorizontalOptions="End" />
                 <Button Text="Editar" Clicked="OnUpdateButtonClicked" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" />
             </StackLayout>
         </StackLayout>

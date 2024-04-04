@@ -40,7 +40,7 @@
                                 <Label Grid.Column="1" Text="{Binding Producto.Descripcion}" HorizontalOptions="Start" VerticalOptions="Center" />
                                 <Label Grid.Column="2" Text="{Binding Cantidad}" HorizontalOptions="Center" VerticalOptions="Center" />
                                 <Label Grid.Column="3" Text="{Binding Producto.Precio, StringFormat='{0: 0.00}'}" HorizontalOptions="Start" VerticalOptions="Center" />
-                                <Label Grid.Column="4" Text="{Binding SubtotalLb, StringFormat='{0: 0.00}'}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                <Label Grid.Column="4" Text="{Binding SubtotalLb, StringFormat='{0:#,0.00}'}" HorizontalOptions="Center" VerticalOptions="Center" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -48,7 +48,7 @@
             </ListView>
 
             <StackLayout>
-                <Label Text="{Binding Total, StringFormat='Total: S/{0: 0.00}'}" HorizontalOptions="End" />
+                <Label Text="{Binding Total, StringFormat='Total: S/{0: #,0.00}'}" HorizontalOptions="End" />
                 <Button Text="Actualizar" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" Command="{Binding ActualizarPedidoCommand}" />
             </StackLayout>
         </StackLayout>
