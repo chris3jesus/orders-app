@@ -24,7 +24,7 @@
                 <Label Grid.Row="0" Grid.Column="4" Text="Subtotal (S/)" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
             </Grid>
 
-            <ListView ItemsSource="{Binding Detalles}" HasUnevenRows="True" VerticalOptions="FillAndExpand">
+            <ListView ItemsSource="{Binding Detalles}" HasUnevenRows="True" VerticalOptions="FillAndExpand" ItemSelected="OnElementSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -39,7 +39,7 @@
                                 <Label Grid.Column="0" Text="{Binding Producto.Codigo}" HorizontalOptions="Center" VerticalOptions="Center" />
                                 <Label Grid.Column="1" Text="{Binding Producto.Descripcion}" HorizontalOptions="Start" VerticalOptions="Center" />
                                 <Label Grid.Column="2" Text="{Binding Cantidad}" HorizontalOptions="Center" VerticalOptions="Center" />
-                                <Label Grid.Column="3" Text="{Binding Producto.Precio, StringFormat='{0: 0.00}'}" HorizontalOptions="Start" VerticalOptions="Center" />
+                                <Label Grid.Column="3" Text="{Binding Producto.Precio, StringFormat='{0:0.00}'}" HorizontalOptions="Start" VerticalOptions="Center" />
                                 <Label Grid.Column="4" Text="{Binding SubtotalLb, StringFormat='{0:#,0.00}'}" HorizontalOptions="Center" VerticalOptions="Center" />
                             </Grid>
                         </ViewCell>
@@ -48,6 +48,8 @@
             </ListView>
 
             <StackLayout>
+                <Label Text="{Binding Subtotal, StringFormat='Subtotal: S/{0: #,0.00}'}" HorizontalOptions="End" />
+                <Label Text="{Binding Igv, StringFormat='IGV (18%): S/{0: #,0.00}'}" HorizontalOptions="End" />
                 <Label Text="{Binding Total, StringFormat='Total: S/{0: #,0.00}'}" HorizontalOptions="End" />
                 <Button Text="Actualizar" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" Command="{Binding ActualizarPedidoCommand}" />
             </StackLayout>
