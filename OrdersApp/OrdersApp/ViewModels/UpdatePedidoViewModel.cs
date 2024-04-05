@@ -27,6 +27,7 @@ namespace OrdersApp.ViewModels
         public ICommand BuscarCommand { get; set; }
         public ICommand SeleccionarProductoCommand { get; private set; }
         public ICommand ActualizarPedidoCommand { get; }
+        public ICommand CalcularTotalCommand { get; private set; }
 
         public PedidosModel Pedido
         {
@@ -48,6 +49,8 @@ namespace OrdersApp.ViewModels
             SeleccionarProductoCommand = new Command<ProductoModel>(async (producto) => await SeleccionarProducto(producto));
             ActualizarPedidoCommand = new Command(async () => await ActualizarPedido());
             CargarDetallePedidoAsync();
+
+            CalcularTotalCommand = new Command(CalcularTotal);
         }
 
         private async void CargarDetallePedidoAsync()
@@ -94,8 +97,21 @@ namespace OrdersApp.ViewModels
             await Application.Current.MainPage.Navigation.PushModalAsync(dialog);
         }
 
-        private decimal _total;
+        private decimal _subtotal;
+        public decimal Subtotal
+        {
+            get { return _subtotal; }
+            set { _subtotal = value; OnPropertyChanged(nameof(Subtotal)); }
+        }
 
+        private decimal _igv;
+        public decimal Igv
+        {
+            get { return _igv; }
+            set { _igv = value; OnPropertyChanged(nameof(Igv)); }
+        }
+
+        private decimal _total;
         public decimal Total
         {
             get { return _total; }
@@ -105,6 +121,8 @@ namespace OrdersApp.ViewModels
         private void CalcularTotal()
         {
             Total = Detalles.Sum(d => d.SubtotalLb);
+            Igv = Total * 0.18m;
+            Subtotal = Total - Igv;
         }
 
         private async Task ActualizarPedido()

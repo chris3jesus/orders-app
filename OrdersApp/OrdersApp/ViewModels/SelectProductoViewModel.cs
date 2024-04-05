@@ -23,6 +23,7 @@ namespace OrdersApp.ViewModels
 
         private PedidosService _pedidosService;
         public ICommand RegistrarPedidoCommand { get; }
+        public ICommand CalcularTotalCommand { get; private set; }
 
         public ICommand BuscarCommand { get; set; }
         public ICommand SeleccionarProductoCommand { get; private set; }
@@ -88,6 +89,7 @@ namespace OrdersApp.ViewModels
 
             ObtenerUbicacion();
             SetDetalles();
+            CalcularTotalCommand = new Command(CalcularTotal);
         }
 
         private async Task BuscarProductos()
@@ -165,6 +167,20 @@ namespace OrdersApp.ViewModels
             }
         }
 
+        private decimal _subtotal;
+        public decimal Subtotal
+        {
+            get { return _subtotal; }
+            set { _subtotal = value; OnPropertyChanged(nameof(Subtotal)); }
+        }
+
+        private decimal _igv;
+        public decimal Igv
+        {
+            get { return _igv; }
+            set { _igv = value; OnPropertyChanged(nameof(Igv)); }
+        }
+
         private decimal _total;
         public decimal Total
         {
@@ -175,6 +191,8 @@ namespace OrdersApp.ViewModels
         private void CalcularTotal()
         {
             Total = Detalles.Sum(d => d.SubtotalLb);
+            Igv = Total * 0.18m;
+            Subtotal = Total - Igv;
         }
 
         private void SetDetalles()
