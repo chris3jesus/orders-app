@@ -28,5 +28,31 @@ namespace OrdersApp.Vistas.Pedidos
             viewModel?.SeleccionarProductoCommand.Execute(selectedProducto);
             ((ListView)sender).SelectedItem = null;
         }
+
+        private async void OnElementSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (e.SelectedItem == null) return;
+            var action = await DisplayActionSheet("Seleccionar acción", "Cancelar", null, "Editar", "Eliminar");
+
+            if (action == "Editar")
+            {
+                if (e.SelectedItem is DetallePedidoModel detalle)
+                {
+                    Console.WriteLine($"Fila seleccionada: {detalle.IdProd}, {detalle.Cantidad}, {detalle.Producto.Precio}");
+                }
+            }
+            else if (action == "Eliminar")
+            {
+                if (BindingContext is UpdatePedidoViewModel viewModel)
+                {
+                    if (viewModel.Detalles.Contains((DetallePedidoModel)e.SelectedItem))
+                    {
+                        viewModel.Detalles.Remove((DetallePedidoModel)e.SelectedItem);
+                        viewModel.CalcularTotalCommand.Execute(null);
+                    }
+                }
+            }
+            ((ListView)sender).SelectedItem = null;
+        }
     }
 }
