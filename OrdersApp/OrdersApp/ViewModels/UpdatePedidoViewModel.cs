@@ -27,6 +27,7 @@ namespace OrdersApp.ViewModels
         public ICommand BuscarCommand { get; set; }
         public ICommand SeleccionarProductoCommand { get; private set; }
         public ICommand ActualizarPedidoCommand { get; }
+        public ICommand EditarProductoCommand { get; private set; }
         public ICommand CalcularTotalCommand { get; private set; }
 
         public PedidosModel Pedido
@@ -48,6 +49,7 @@ namespace OrdersApp.ViewModels
 
             SeleccionarProductoCommand = new Command<ProductoModel>(async (producto) => await SeleccionarProducto(producto));
             ActualizarPedidoCommand = new Command(async () => await ActualizarPedido());
+            EditarProductoCommand = new Command<DetallePedidoModel>(async (producto) => await SeleccionarItem(producto));
             CargarDetallePedidoAsync();
 
             CalcularTotalCommand = new Command(CalcularTotal);
@@ -92,6 +94,19 @@ namespace OrdersApp.ViewModels
             dialog.DetallePedidoAgregado += (sender, detalle) =>
             {
                 Detalles.Add(detalle);
+                CalcularTotal();
+            };
+            await Application.Current.MainPage.Navigation.PushModalAsync(dialog);
+        }
+
+        private async Task SeleccionarItem(DetallePedidoModel producto)
+        {
+            var dialog = new UpdateProductoDialog(producto);
+            dialog.DetallePedidoEditado += (sender, detalle) =>
+            {
+                int index = Detalles.IndexOf(producto);
+                Detalles.RemoveAt(index);
+                Detalles.Insert(index, detalle);
                 CalcularTotal();
             };
             await Application.Current.MainPage.Navigation.PushModalAsync(dialog);

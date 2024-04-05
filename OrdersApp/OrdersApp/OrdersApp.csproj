@@ -57,5 +57,8 @@
     <EmbeddedResource Update="Vistas\Productos\SeleccionProductoDialog.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Vistas\Productos\UpdateProductoDialog.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

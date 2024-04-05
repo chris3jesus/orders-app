@@ -102,7 +102,10 @@ namespace OrdersApp.Vistas.Pedidos
             {
                 if (e.SelectedItem is DetallePedidoModel detalle)
                 {
-                    Console.WriteLine($"Fila seleccionada: {detalle.IdProd}, {detalle.Cantidad}, {detalle.Producto.Precio}");
+                    if (BindingContext is SelectProductoViewModel viewModel)
+                    {
+                        viewModel.EditarProductoCommand.Execute(detalle);
+                    }
                 }
             }
             else if (action == "Eliminar")
