@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace OrdersApp.ViewModels
@@ -16,11 +17,19 @@ namespace OrdersApp.ViewModels
     public class UpdatePedidoViewModel : INotifyPropertyChanged
     {
         private PedidosModel _pedido;
+        private ClienteModel _cliente;
+
         public string TextoBusqueda { get; set; }
+        public DateTime Fecha { get; set; } = DateTime.Now;
+
+        private double _latitud;
+        private double _longitud;
+        private string _ubicacion;
 
         public ObservableCollection<DetallePedidoModel> Detalles { get; set; }
         public ObservableCollection<ProductoModel> Productos { get; set; }
 
+        private ClientesService _clientesService;
         private PedidosService _pedidosService;
         private ProductosService _productosService;
 
@@ -36,11 +45,25 @@ namespace OrdersApp.ViewModels
             set { _pedido = value; OnPropertyChanged(nameof(Pedido)); }
         }
 
+        public ClienteModel Cliente
+        {
+            get { return _cliente; }
+            set { _cliente = value; OnPropertyChanged(nameof(Cliente)); }
+        }
+
+        public string Ubicacion
+        {
+            get { return _ubicacion; }
+            set { _ubicacion = value; OnPropertyChanged(nameof(Ubicacion)); }
+        }
+
         public UpdatePedidoViewModel(PedidosModel pedido)
         {
             Pedido = pedido;
             Detalles = new ObservableCollection<DetallePedidoModel>();
+            Cliente = new ClienteModel();
 
+            _clientesService = new ClientesService();
             _productosService = new ProductosService();
             _pedidosService = new PedidosService();
 
@@ -51,6 +74,8 @@ namespace OrdersApp.ViewModels
             ActualizarPedidoCommand = new Command(async () => await ActualizarPedido());
             EditarProductoCommand = new Command<DetallePedidoModel>(async (producto) => await SeleccionarItem(producto));
             CargarDetallePedidoAsync();
+            CargarDatosClienteAsync();
+            ObtenerUbicacion();
 
             CalcularTotalCommand = new Command(CalcularTotal);
         }
@@ -70,9 +95,68 @@ namespace OrdersApp.ViewModels
                     SubtotalLb = producto[0].Precio * (1 - detalle.Dscto1) * (1 - detalle.Dscto2) * detalle.Cantidad,
                 };
                 Detalles.Add(detalleRes);
-                Console.WriteLine(detalleRes);
             }
             CalcularTotal();
+        }
+
+        private async void CargarDatosClienteAsync()
+        {
+            var cliente = await _clientesService.BuscarClientes(Pedido.CodCli, "");
+            Cliente = new ClienteModel
+            {
+                Codigo = cliente[0].Codigo,
+                Documento = cliente[0].Documento,
+                Razon = cliente[0].Razon,
+                Nombre = cliente[0].Nombre,
+                Comercial = cliente[0].Comercial,
+                Direcciones = cliente[0].Direcciones,
+                Vendedor = cliente[0].Vendedor
+            };
+        }
+
+        public async void ObtenerUbicacion()
+        {
+            try
+            {
+                var location = await Geolocation.GetLocationAsync();
+                if (location != null)
+                {
+                    _latitud = location.Latitude;
+                    _longitud = location.Longitude;
+                    Pedido.Latitud = _latitud;
+                    Pedido.Longitud = _longitud;
+
+                    var placemarks = await Geocoding.GetPlacemarksAsync(location.Latitude, location.Longitude);
+                    var placemark = placemarks?.FirstOrDefault();
+
+                    if (placemark.SubLocality != null)
+                    {
+                        Ubicacion = placemark.SubLocality + " / " + placemark.Locality;
+                    }
+                    else
+                    {
+                        Ubicacion = placemark.Thoroughfare + " / " + placemark.Locality;
+                    }
+                }
+                else
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "No se puede obtener ubicación", "Aceptar");
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Geolocalización no soportada", "Aceptar");
+            }
+
+            catch (PermissionException pEx)
+            {
+
+                await Application.Current.MainPage.DisplayAlert("Error", "Permiso denegado para acceder a la geolocalización", "Aceptar");
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Error al obtener la ubicación", "Aceptar");
+            }
         }
 
         private async Task BuscarProductos()
