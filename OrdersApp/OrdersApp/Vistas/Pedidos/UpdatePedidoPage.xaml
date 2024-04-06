@@ -4,6 +4,48 @@
              x:Class="OrdersApp.Vistas.Pedidos.UpdatePedidoPage"
             Title="{Binding Pedido.Codigo}">
 
+    <ContentPage Title="Cliente">
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Label Text="Editando pedido" HorizontalOptions="Center" />
+                <Label Text="{Binding Ubicacion}" HorizontalOptions="Center" />
+                <Label Text="{Binding Fecha}" HorizontalOptions="Center" />
+                <Label Text="PEDIDO" FontAttributes="Bold" />
+                <Picker x:Name="formaPagoPicker" Title="Seleccionar Forma de Pago" SelectedIndexChanged="FormaPagoPicker_SelectedIndexChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Contado</x:String>
+                            <!-- <x:String>Crédito</x:String> -->
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Picker x:Name="tipoDocPicker" Title="Seleccionar Tipo de Documento" SelectedIndexChanged="TipoDocPicker_SelectedIndexChanged">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Factura</x:String>
+                            <x:String>Boleta</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Label Text="CLIENTE" FontAttributes="Bold" />
+
+                <Label Text="{Binding Cliente.Documento, StringFormat='RUC / DNI: {0}'}" />
+                <Label Text="{Binding Cliente.Comercial}" />
+                <Label Text="{Binding Cliente.Razon}" />
+                <Picker x:Name="direccionPicker" Title="Seleccionar Dirección" ItemsSource="{Binding Cliente.Direcciones}" SelectedIndexChanged="DireccionPicker_SelectedIndexChanged">
+                    <Picker.ItemDisplayBinding>
+                        <Binding Path="Direccion"/>
+                    </Picker.ItemDisplayBinding>
+                </Picker>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                    <CheckBox x:Name="fleteCheckBox" CheckedChanged="FleteCheckBox_CheckedChanged" />
+                    <Label Text="Flete" VerticalOptions="Center" />
+                </StackLayout>
+                <Editor Text="{Binding Pedido.Observ}" Placeholder="Observaciones" AutoSize="TextChanges" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+
     <ContentPage Title="Detalle">
         <StackLayout Padding="10" VerticalOptions="FillAndExpand">
             <Grid BackgroundColor="LightBlue">
