@@ -92,7 +92,9 @@ namespace OrdersApp.ViewModels
                     Dscto1 = detalle.Dscto1,
                     Dscto2 = detalle.Dscto2,
                     Producto = producto[0],
-                    SubtotalLb = producto[0].Precio * (1 - detalle.Dscto1) * (1 - detalle.Dscto2) * detalle.Cantidad,
+                    SubtotalLb = Math.Round(producto[0].Precio * (1 - detalle.Dscto1) * (1 - detalle.Dscto2) * detalle.Cantidad, 2),
+                    NomPres = producto[0].Descripcion + " - " + producto[0].Presentacion,
+                    PscDsc = Math.Round(producto[0].Precio * (1 - detalle.Dscto1) * (1 - detalle.Dscto2), 2)
                 };
                 Detalles.Add(detalleRes);
             }
