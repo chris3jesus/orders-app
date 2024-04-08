@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace OrdersApp.Servicios
 {
     public class ClientesService
     {
-        private const string Host = "http://10.0.2.2:5077";
-        private const string Url = Host + "/api/clientes";
+        private static readonly string Host = (string)Application.Current.Resources["BaseUrl"];
+        private static readonly string Url = Host + "/api/clientes";
 
         public async Task<List<ClienteModel>> BuscarClientes(int vendedor, string textoBusqueda)
         {

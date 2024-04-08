@@ -10,6 +10,8 @@
                 <Setter Property="BarTextColor" Value="White" />
                 <Setter Property="BackgroundColor" Value="#E6F2E6" />
             </Style>
+
+            <x:String x:Key="BaseUrl">http://10.0.2.2:5077</x:String>
         </ResourceDictionary>
 
     </Application.Resources>
