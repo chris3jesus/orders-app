@@ -79,9 +79,9 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0" Text="{Binding Producto.Codigo}" HorizontalOptions="Center" VerticalOptions="Center" />
-                                <Label Grid.Column="1" Text="{Binding Producto.Descripcion}" HorizontalOptions="Start" VerticalOptions="Center" />
+                                <Label Grid.Column="1" Text="{Binding NomPres}" HorizontalOptions="Start" VerticalOptions="Center" />
                                 <Label Grid.Column="2" Text="{Binding Cantidad}" HorizontalOptions="Center" VerticalOptions="Center" />
-                                <Label Grid.Column="3" Text="{Binding Producto.Precio, StringFormat='{0:0.00}'}" HorizontalOptions="Start" VerticalOptions="Center" />
+                                <Label Grid.Column="3" Text="{Binding PscDsc, StringFormat='{0:0.00}'}" HorizontalOptions="Start" VerticalOptions="Center" />
                                 <Label Grid.Column="4" Text="{Binding SubtotalLb, StringFormat='{0:#,0.00}'}" HorizontalOptions="Center" VerticalOptions="Center" />
                             </Grid>
                         </ViewCell>
