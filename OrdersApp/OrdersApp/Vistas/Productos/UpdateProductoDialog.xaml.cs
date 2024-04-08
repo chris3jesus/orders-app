@@ -54,6 +54,9 @@ namespace OrdersApp.Vistas.Productos
             _detallePedido.Dscto1 = Convert.ToDecimal(dscto1Entry.Text);
             _detallePedido.Dscto2 = Convert.ToDecimal(dscto2Entry.Text);
 
+            _detallePedido.NomPres = _detallePedido.Producto.Descripcion + " - " + _detallePedido.Producto.Presentacion;
+            _detallePedido.PscDsc = Math.Round(_detallePedido.Producto.Precio * (1 - _detallePedido.Dscto1) * (1 - _detallePedido.Dscto2), 2);
+
             DetallePedidoEditado?.Invoke(this, _detallePedido);
             await Navigation.PopModalAsync();
         }
