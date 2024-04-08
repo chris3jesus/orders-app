@@ -14,7 +14,7 @@ namespace OrdersApp.Modelos
         public int DiasCred { get; set; }
         public string TipoDoc { get; set; }
         public DateTime FechaReg { get; set; }
-        // public DateTime FechaProc { get; set; }
+        public DateTime? FechaProc { get; set; }
         public string Estado { get; set; }
         public decimal Subtotal { get; set; }
         public decimal Igv { get; set; }
@@ -24,7 +24,7 @@ namespace OrdersApp.Modelos
         public double Longitud { get; set; }
         public bool Flete { get; set; }
         public string Observ { get; set; }
-        // public DateTime FechaEdit { get; set; }
+        public DateTime? FechaEdit { get; set; }
         public string UsuarioProc { get; set; }
         public List<DetallesPedidoModel> DetPedidos { get; set; }
     }

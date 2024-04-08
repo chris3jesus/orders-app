@@ -29,5 +29,7 @@ namespace OrdersApp.Modelos
         public decimal Dscto2 { get; set; }
         public ProductoModel Producto { get; set; }
         public decimal SubtotalLb { get; set; }
+        public decimal PscDsc { get; set; }
+        public string NomPres { get; set; }
     }
 }
