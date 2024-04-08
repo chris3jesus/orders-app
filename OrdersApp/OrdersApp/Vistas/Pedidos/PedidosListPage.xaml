@@ -17,10 +17,21 @@
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Codigo, StringFormat='Código: {0}'}" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
                                     <Label Text="{Binding CondPago}" HorizontalOptions="End" FontAttributes="Bold" />
-                                    <Label Text="{Binding TipoDoc}" HorizontalOptions="End" FontAttributes="Bold" />
+
+                                    <Label Text="{Binding TipoDoc}" HorizontalOptions="End" FontAttributes="Bold">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding TipoDoc}" Value="B">
+                                                <Setter Property="Text" Value="Boleta" />
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" Binding="{Binding TipoDoc}" Value="F">
+                                                <Setter Property="Text" Value="Factura" />
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding FechaReg}" HorizontalOptions="StartAndExpand" />
+                                    <Label Text="{Binding FechaReg, StringFormat='Se registró: {0}'}" HorizontalOptions="StartAndExpand" />
                                     <Label Text="{Binding Estado}" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">

@@ -7,19 +7,36 @@
         <StackLayout Padding="10">
             <StackLayout Orientation="Horizontal">
                 <Label Text="{Binding Pedido.Estado, StringFormat='Estado: {0}'}" HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
-                <Label Text="{Binding Pedido.FechaReg}" HorizontalOptions="EndAndExpand" FontAttributes="Bold" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Pedido.CondPago, StringFormat='Condición de pago: {0}'}" HorizontalOptions="StartAndExpand" />
-                <Label Text="{Binding Pedido.TipoDoc, StringFormat='Tipo de documento: {0}'}" HorizontalOptions="EndAndExpand" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Pedido.CodCli, StringFormat='Cliente: {0}'}" HorizontalOptions="StartAndExpand" />
-                <Label Text="{Binding Pedido.IdDirCli, StringFormat='Dirección: {0}'}" HorizontalOptions="EndAndExpand" />
+                <Label Text="{Binding Fecha}" HorizontalOptions="EndAndExpand" FontAttributes="Bold" />
             </StackLayout>
             <StackLayout>
+                <Label Text="{Binding Pedido.CondPago, StringFormat='Condición de pago: {0}'}" />
+
+                <Label Text="{Binding Pedido.TipoDoc}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Pedido.TipoDoc}" Value="B">
+                            <Setter Property="Text" Value="Tipo de documento: Boleta" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" Binding="{Binding Pedido.TipoDoc}" Value="F">
+                            <Setter Property="Text" Value="Tipo de documento: Factura" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+
+                <Label Text="{Binding Cliente.Comercial, StringFormat='Cliente: {0}'}" />
+                <Label Text="{Binding Direccion, StringFormat='Dirección: {0}'}" />
                 <Label Text="{Binding Pedido.Observ, StringFormat='Observación: {0}'}" />
-                <Label Text="{Binding Pedido.Flete, StringFormat='Flete: {0}'}" />
+
+                <Label Text="{Binding Pedido.Flete}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Pedido.Flete}" Value="True">
+                            <Setter Property="Text" Value="Flete: Sí" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Label" Binding="{Binding Pedido.Flete}" Value="False">
+                            <Setter Property="Text" Value="Flete: No" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
             </StackLayout>
 
             <StackLayout>
@@ -33,13 +50,14 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Text="Producto" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
-                    <Label Grid.Row="0" Grid.Column="1" Text="Cantidad" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
-                    <Label Grid.Row="0" Grid.Column="2" Text="Precio (S/)" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
-                    <Label Grid.Row="0" Grid.Column="3" Text="Subtotal (S/)" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                    <Label Grid.Row="0" Grid.Column="0" Text="Código" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                    <Label Grid.Row="0" Grid.Column="1" Text="Producto" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                    <Label Grid.Row="0" Grid.Column="2" Text="Cantidad" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                    <Label Grid.Row="0" Grid.Column="3" Text="Precio (S/)" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
+                    <Label Grid.Row="0" Grid.Column="4" Text="Subtotal (S/)" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" />
                 </Grid>
 
-                <ListView ItemsSource="{Binding Pedido.DetPedidos}" HasUnevenRows="True" VerticalOptions="FillAndExpand">
+                <ListView ItemsSource="{Binding Detalles}" HasUnevenRows="True" VerticalOptions="FillAndExpand">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -49,11 +67,13 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Text="{Binding IdProd}" HorizontalOptions="Center" VerticalOptions="Center" />
-                                    <Label Grid.Column="1" Text="{Binding Cantidad}" HorizontalOptions="Center" VerticalOptions="Center" />
-                                    <Label Grid.Column="2" Text="{Binding PrecDscto, StringFormat='{0: 0.00}'}" HorizontalOptions="Center" VerticalOptions="Center" />
-                                    <Label Grid.Column="3" Text="{Binding Total, StringFormat='{0:#,0.00}'}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Label Grid.Column="0" Text="{Binding Producto.Codigo}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Label Grid.Column="1" Text="{Binding NomPres}" HorizontalOptions="Start" VerticalOptions="Center" />
+                                    <Label Grid.Column="2" Text="{Binding Cantidad}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Label Grid.Column="3" Text="{Binding PscDsc, StringFormat='{0:0.00}'}" HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <Label Grid.Column="4" Text="{Binding SubtotalLb, StringFormat='{0:#,0.00}'}" HorizontalOptions="Center" VerticalOptions="Center" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>
@@ -61,11 +81,9 @@
                 </ListView>
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding Pedido.Subtotal, StringFormat='Subtotal: S/ {0:#,0.00}'}" HorizontalOptions="StartAndExpand" />
-                <Label Text="{Binding Pedido.Igv, StringFormat='IGV (18%): S/ {0:#,0.00}'}" HorizontalOptions="EndAndExpand" />
-            </StackLayout>
             <StackLayout>
+                <Label Text="{Binding Pedido.Subtotal, StringFormat='Subtotal: S/ {0:#,0.00}'}" HorizontalOptions="End" />
+                <Label Text="{Binding Pedido.Igv, StringFormat='IGV (18%): S/ {0:#,0.00}'}" HorizontalOptions="End" />
                 <Label Text="{Binding Pedido.Total, StringFormat='Total: S/ {0:#,0.00}'}" HorizontalOptions="End" />
                 <Button Text="Editar" Clicked="OnUpdateButtonClicked" BackgroundColor="#4CAF50" TextColor="White" CornerRadius="5" />
             </StackLayout>
