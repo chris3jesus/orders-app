@@ -6,8 +6,8 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
             <Label Text="{Binding Documento, StringFormat='RUC / DNI: {0}'}" FontAttributes="Bold" />
-            <Label Text="{Binding Razon}" />
             <Label Text="{Binding Comercial}" />
+            <Label Text="{Binding Razon}" />
             <Label Text="{Binding Nombre}" />
             <Label Text="{Binding Vendedor, StringFormat='Código vendedor: {0}'}" />
 
