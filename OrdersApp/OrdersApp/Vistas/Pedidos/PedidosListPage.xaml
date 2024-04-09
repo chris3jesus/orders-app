@@ -28,14 +28,17 @@
                                             </DataTrigger>
                                         </Label.Triggers>
                                     </Label>
-
                                 </StackLayout>
+
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding FechaReg, StringFormat='Se registró: {0}'}" HorizontalOptions="StartAndExpand" />
                                     <Label Text="{Binding Estado}" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding CodCli, StringFormat='Cliente: {0}'}" HorizontalOptions="StartAndExpand" />
+                                    <Label Text="{Binding Subtotal, StringFormat='Subtotal: S/ {0:#,0.00}'}" HorizontalOptions="EndAndExpand" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Total, StringFormat='Total: S/ {0:#,0.00}'}" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                             </StackLayout>
