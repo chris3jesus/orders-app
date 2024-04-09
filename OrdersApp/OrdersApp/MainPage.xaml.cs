@@ -15,9 +15,6 @@ namespace OrdersApp
         {
             InitializeComponent();
             BindingContext = new MainPageViewModel();
-
-            CodigoEntry.Text = "46";
-            ClaveEntry.Text = "123456";
         }
     }
 }
