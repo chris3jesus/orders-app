@@ -27,6 +27,7 @@ namespace OrdersApp.ViewModels
 
         private int _nPedidos;
         private decimal _total;
+        private decimal _subtotal;
 
         public int NPedidos
         {
@@ -38,6 +39,12 @@ namespace OrdersApp.ViewModels
         {
             get { return _total; }
             set { _total = value; OnPropertyChanged(nameof(Total)); }
+        }
+
+        public decimal Subtotal
+        {
+            get { return _subtotal; }
+            set { _subtotal = value; OnPropertyChanged(nameof(Subtotal)); }
         }
 
         public ICommand SeleccionarPedidoCommand { get; private set; }
@@ -66,14 +73,14 @@ namespace OrdersApp.ViewModels
         {
             NPedidos = Pedidos.Count;
             decimal sumaTotales = 0;
+            decimal sumaSubtotales = 0;
             foreach (var pedido in Pedidos)
             {
                 sumaTotales += pedido.Total;
+                sumaSubtotales += pedido.Subtotal;
             }
             Total = sumaTotales;
-
-            Console.WriteLine($"Total de objetos: {NPedidos}");
-            Console.WriteLine($"Suma de totales: {sumaTotales}");
+            Subtotal = sumaSubtotales;
         }
 
         private async Task SeleccionarPedido(PedidosModel pedidos)

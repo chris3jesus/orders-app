@@ -6,6 +6,7 @@
     <ContentPage.Content>
         <StackLayout Padding="10">
             <Label Text="{Binding Vendedor.Nombre, StringFormat='Vendedor: {0}'}" HorizontalOptions="Center" />
+            <Label Text="{Binding Subtotal, StringFormat='Subtotal: S/ {0:#,0.00}'}" HorizontalOptions="Center" />
             <Label Text="{Binding Total, StringFormat='Total: S/ {0:#,0.00}'}" HorizontalOptions="Center" />
             <Label Text="{Binding NPedidos, StringFormat='N.º Pedidos: {0}'}" HorizontalOptions="Center" />
 
