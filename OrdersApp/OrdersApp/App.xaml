@@ -11,7 +11,15 @@
                 <Setter Property="BackgroundColor" Value="#E6F2E6" />
             </Style>
 
+            <!--
             <x:String x:Key="BaseUrl">http://10.0.2.2:5077</x:String>
+            <x:String x:Key="BaseUrl">https://d3d3-190-119-127-10.ngrok-free.app</x:String>
+            
+            <x:String x:Key="BaseUrl">https://capital-fit-ostrich.ngrok-free.app</x:String>
+            <x:String x:Key="BaseUrl">https://5349-190-119-127-11.ngrok-free.app</x:String>
+            -->
+
+            <x:String x:Key="BaseUrl">https://capital-fit-ostrich.ngrok-free.app</x:String>
         </ResourceDictionary>
 
     </Application.Resources>

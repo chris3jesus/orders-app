@@ -10,6 +10,7 @@
         <Label Text="{Binding Presentacion, StringFormat='Presentación: {0}'}" />
         <Label Text="{Binding Marca, StringFormat='Marca: {0}'}" />
         <Label Text="{Binding Stock, StringFormat='Stock: {0}'}" />
+        <Label Text="{Binding Comprometido, StringFormat='Comprometido: {0}'}" />
         <Label Text="{Binding Precio, StringFormat='Precio: {0:S/ 0.00}'}" />
 
         <Grid Padding="10">
@@ -22,7 +23,7 @@
             <Entry Grid.Column="1" Placeholder="Ingrese cantidad" x:Name="cantidadEntry" Keyboard="Numeric" />
 
             <Label Grid.Row="1" Text="Descuento 1:" VerticalOptions="Center" />
-            <Entry Grid.Row="1" Grid.Column="1" Placeholder="Ingrese descuento 1" x:Name="dscto1Entry" Text="0.00" Keyboard="Numeric" IsReadOnly="True" />
+            <Entry Grid.Row="1" Grid.Column="1" Placeholder="Ingrese descuento 1" x:Name="dscto1Entry" Text="0.00" Keyboard="Numeric" IsReadOnly="False" />
 
             <Label Grid.Row="2" Text="Descuento 2:" VerticalOptions="Center" />
             <Entry Grid.Row="2" Grid.Column="1" Placeholder="Ingrese descuento 2" x:Name="dscto2Entry" Text="0.00" Keyboard="Numeric" IsReadOnly="True" />

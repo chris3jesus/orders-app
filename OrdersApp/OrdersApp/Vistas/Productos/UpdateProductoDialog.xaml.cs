@@ -44,18 +44,26 @@ namespace OrdersApp.Vistas.Productos
                 return;
             }
 
-            if (cantidad > _detallePedido.Producto.Stock)
+            decimal descuento1 = Convert.ToDecimal(dscto1Entry.Text);
+
+            if (descuento1 < 0 || descuento1 > 100)
             {
-                await DisplayAlert("Sin stock", "No hay suficiente stock disponible", "Aceptar");
+                await DisplayAlert("Error", "El rango de descuento permitido es de 0 a 100", "Aceptar");
                 return;
             }
+
+            //if (cantidad > _detallePedido.Producto.Stock)
+            //{
+            //   await DisplayAlert("Sin stock", "No hay suficiente stock disponible", "Aceptar");
+            //   return;
+            //}
 
             _detallePedido.Cantidad = Convert.ToInt32(cantidadEntry.Text);
             _detallePedido.Dscto1 = Convert.ToDecimal(dscto1Entry.Text);
             _detallePedido.Dscto2 = Convert.ToDecimal(dscto2Entry.Text);
 
             _detallePedido.NomPres = _detallePedido.Producto.Descripcion + " - " + _detallePedido.Producto.Presentacion;
-            _detallePedido.PscDsc = Math.Round(_detallePedido.Producto.Precio * (1 - _detallePedido.Dscto1) * (1 - _detallePedido.Dscto2), 2);
+            _detallePedido.PscDsc = Math.Round(_detallePedido.Producto.Precio * (1 - _detallePedido.Dscto1 / 100m) * (1 - _detallePedido.Dscto2 / 100m), 2);
 
             DetallePedidoEditado?.Invoke(this, _detallePedido);
             await Navigation.PopModalAsync();

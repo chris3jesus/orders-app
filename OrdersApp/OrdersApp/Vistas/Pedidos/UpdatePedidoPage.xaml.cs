@@ -34,14 +34,14 @@ namespace OrdersApp.Vistas.Pedidos
             SelectIndexBasedOnPedidoId();
         }
 
-        private async void SelectIndexBasedOnPedidoId()
+        private async Task SelectIndexBasedOnPedidoId()
         {
             var viewModel = (UpdatePedidoViewModel)BindingContext;
             var pedido = viewModel.Pedido;
             int idDireccionPedido = pedido.IdDirCli;
 
             int indiceSeleccionado = -1;
-            await Task.Delay(100);
+            await Task.Delay(300);
 
             for (int i = 0; i < viewModel.Cliente.Direcciones.Count; i++)
             {

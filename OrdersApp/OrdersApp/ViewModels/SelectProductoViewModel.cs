@@ -218,11 +218,16 @@ namespace OrdersApp.ViewModels
 
         private async Task RegistrarPedido()
         {
-            if (Detalles == null || Detalles.Count == 0) { return; }
+            if (Detalles == null || Detalles.Count == 0)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Debe agregar productos", "OK");
+                return;
+            }
 
             if (Pedido.IdDirCli == 0)
             {
-                Pedido.IdDirCli = Cliente.Direcciones[0].Codigo;
+                await Application.Current.MainPage.DisplayAlert("Error", "Debe seleccionar una dirección", "OK");
+                return;
             }
 
             if (Observacion == null) { Observacion = ""; }
@@ -235,7 +240,10 @@ namespace OrdersApp.ViewModels
             if (enviado)
             {
                 await Application.Current.MainPage.DisplayAlert("Éxito", "El pedido se registró correctamente", "OK");
-                await Application.Current.MainPage.Navigation.PushAsync(new MenuPage(Vendedor));
+                await Application.Current.MainPage.Navigation.PopAsync();
+                await Application.Current.MainPage.Navigation.PopAsync();
+                // await Application.Current.MainPage.Navigation.PopAsync();
+                // await Application.Current.MainPage.Navigation.PushAsync(new MenuPage(Vendedor));
             }
             else
             {

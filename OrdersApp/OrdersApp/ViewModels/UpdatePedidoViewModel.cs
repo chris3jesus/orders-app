@@ -80,7 +80,7 @@ namespace OrdersApp.ViewModels
             CalcularTotalCommand = new Command(CalcularTotal);
         }
 
-        private async void CargarDetallePedidoAsync()
+        private async Task CargarDetallePedidoAsync()
         {
             foreach (var detalle in Pedido.DetPedidos)
             {
@@ -92,16 +92,16 @@ namespace OrdersApp.ViewModels
                     Dscto1 = detalle.Dscto1,
                     Dscto2 = detalle.Dscto2,
                     Producto = producto[0],
-                    SubtotalLb = Math.Round(producto[0].Precio * (1 - detalle.Dscto1) * (1 - detalle.Dscto2) * detalle.Cantidad, 2),
+                    SubtotalLb = Math.Round(producto[0].Precio * (1 - detalle.Dscto1 / 100m) * (1 - detalle.Dscto2 / 100m) * detalle.Cantidad, 2),
                     NomPres = producto[0].Descripcion + " - " + producto[0].Presentacion,
-                    PscDsc = Math.Round(producto[0].Precio * (1 - detalle.Dscto1) * (1 - detalle.Dscto2), 2)
+                    PscDsc = Math.Round(producto[0].Precio * (1 - detalle.Dscto1 / 100m) * (1 - detalle.Dscto2 / 100m), 2)
                 };
                 Detalles.Add(detalleRes);
             }
             CalcularTotal();
         }
 
-        private async void CargarDatosClienteAsync()
+        private async Task CargarDatosClienteAsync()
         {
             var cliente = await _clientesService.BuscarClientes(Pedido.CodCli, "");
             Cliente = new ClienteModel
@@ -228,7 +228,11 @@ namespace OrdersApp.ViewModels
 
         private async Task ActualizarPedido()
         {
-            if (Detalles == null || Detalles.Count == 0) { return; }
+            if (Detalles == null || Detalles.Count == 0)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Debe agregar productos", "OK");
+                return;
+            }
 
             var detallesPedidoModel = Detalles.Select(detalle => new DetallesPedidoModel
             {
@@ -244,7 +248,7 @@ namespace OrdersApp.ViewModels
 
             if (enviado)
             {
-                await Application.Current.MainPage.DisplayAlert("Éxito", "El pedido se registró correctamente", "OK");
+                await Application.Current.MainPage.DisplayAlert("Éxito", "El pedido se actualizó correctamente", "OK");
                 await Application.Current.MainPage.Navigation.PopAsync();
                 await Application.Current.MainPage.Navigation.PopAsync();
                 await Application.Current.MainPage.Navigation.PopAsync();

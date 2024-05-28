@@ -13,5 +13,6 @@ namespace OrdersApp.Modelos
         public decimal Valor { get; set; }
         public decimal Precio { get; set; }
         public int Stock { get; set; }
+        public int Comprometido { get; set; }
     }
 }

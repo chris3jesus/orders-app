@@ -133,6 +133,7 @@
                                     </Label>
                                 </Grid>
 
+                                <Label Text="{Binding Comprometido, StringFormat='Comprometido: {0}'}" />
                                 <Label Text="{Binding Marca}" />
                                 <Label Text="{Binding Descripcion}" />
 

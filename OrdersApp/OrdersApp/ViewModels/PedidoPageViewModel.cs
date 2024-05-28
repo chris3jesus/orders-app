@@ -58,7 +58,7 @@ namespace OrdersApp.ViewModels
             CargarFechaAsync();
         }
 
-        private async void CargarDetallePedidoAsync()
+        private async Task CargarDetallePedidoAsync()
         {
             foreach (var detalle in Pedido.DetPedidos)
             {
@@ -70,15 +70,15 @@ namespace OrdersApp.ViewModels
                     Dscto1 = detalle.Dscto1,
                     Dscto2 = detalle.Dscto2,
                     Producto = producto[0],
-                    SubtotalLb = producto[0].Precio * (1 - detalle.Dscto1) * (1 - detalle.Dscto2) * detalle.Cantidad,
+                    SubtotalLb = producto[0].Precio * (1 - detalle.Dscto1 / 100m) * (1 - detalle.Dscto2 / 100m) * detalle.Cantidad,
                     NomPres = producto[0].Descripcion + " - " + producto[0].Presentacion,
-                    PscDsc = producto[0].Precio * (1 - detalle.Dscto1) * (1 - detalle.Dscto2)
+                    PscDsc = producto[0].Precio * (1 - detalle.Dscto1 / 100m) * (1 - detalle.Dscto2 / 100m)
                 };
                 Detalles.Add(detalleRes);
             }
         }
 
-        private async void CargarDatosClienteAsync()
+        private async Task CargarDatosClienteAsync()
         {
             var cliente = await _clientesService.BuscarClientes(Pedido.CodCli, "");
             Cliente = new ClienteModel
@@ -93,9 +93,9 @@ namespace OrdersApp.ViewModels
             };
         }
 
-        private async void CargarDireccionAsync()
+        private async Task CargarDireccionAsync()
         {
-            await Task.Delay(100);
+            await Task.Delay(500);
             foreach (var direccion in Cliente.Direcciones)
             {
                 if (direccion.Codigo == Pedido.IdDirCli)
@@ -105,9 +105,8 @@ namespace OrdersApp.ViewModels
             }
         }
 
-        private async void CargarFechaAsync()
+        private async Task CargarFechaAsync()
         {
-            await Task.Delay(100);
             if (Pedido.FechaProc != null)
             {
                 Fecha = (DateTime)Pedido.FechaProc;
