@@ -8,9 +8,10 @@
         <StackLayout Padding="10">
             <Label Text="{Binding Descripcion}" FontAttributes="Bold" />
             <Label Text="{Binding Presentacion, StringFormat='Presentación: {0}'}" />
-            <Label Text="{Binding Marca, StringFormat='Marca: {0}'}" />
+            <Label Text="{Binding Marca, StringFormat='Línea: {0}'}" />
 
             <Label Text="{Binding Stock, StringFormat='Stock disponible: {0}'}" HorizontalOptions="End" />
+            <Label Text="{Binding Comprometido, StringFormat='Stock comprometido: {0}'}" HorizontalOptions="End" />
             <Label Text="{Binding Precio, StringFormat='Precio: {0:S/ 0.00}'}" HorizontalOptions="End" />
         </StackLayout>
     </ContentPage.Content>
