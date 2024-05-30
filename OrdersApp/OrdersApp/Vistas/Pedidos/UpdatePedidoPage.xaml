@@ -126,14 +126,13 @@
                                     <Label Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="Stock disponible: " FontAttributes="Bold" />
+                                                <Span Text="Stock Disponible: " FontAttributes="Bold" />
                                                 <Span Text="{Binding Stock}" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
                                 </Grid>
 
-                                <Label Text="{Binding Marca}" />
                                 <Label Text="{Binding Descripcion}" />
 
                                 <Grid>
@@ -143,6 +142,16 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Label Text="{Binding Presentacion}" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" />
+                                    <Label Text="{Binding Comprometido, StringFormat='Stock Comprometido: {0}'}" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" />
+                                </Grid>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding Marca}" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Center" />
                                     <Label Text="{Binding Precio, StringFormat='Precio: {0:S/ 0.00}'}" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" />
                                 </Grid>
                             </StackLayout>
