@@ -1,5 +1,6 @@
 ﻿using OrdersApp.Modelos;
 using OrdersApp.ViewModels;
+using OrdersApp.Vistas.Avances;
 using OrdersApp.Vistas.Pedidos;
 using System;
 using System.Collections.Generic;
@@ -38,6 +39,21 @@ namespace OrdersApp.Vistas
         private async void OnProductosButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ProductosListPage());
+        }
+
+        private async void OnAvancesButtonClicked(object sender, EventArgs e)
+        {
+            var menuPageViewModel = (MenuPageViewModel)BindingContext;
+            var vendedor = menuPageViewModel.Vendedor;
+
+            if (vendedor.Supervisor)
+            {
+                await Navigation.PushAsync(new SuperPage(vendedor));
+            }
+            else
+            {
+                await Navigation.PushAsync(new AvancePage(vendedor));
+            }
         }
     }
 }
