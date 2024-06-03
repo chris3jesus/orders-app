@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="OrdersApp.Vistas.Avances.AvancesClientesPage"
+             BackgroundColor="#E6F2E6">
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Text="Avances" FontAttributes="Bold" FontSize="Large" HorizontalOptions="Center" />
+            <Label Text="{Binding Reporte}" HorizontalOptions="Center" />
+            <Label Text="{Binding Persona}" HorizontalOptions="Center" />
+            <Label Text="{Binding Fecha}" HorizontalOptions="Center" />
+            <ScrollView Orientation="Horizontal">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition Width="90" />
+                    </Grid.ColumnDefinitions>
+                    <!-- Header Row -->
+                    <Label Text="Línea" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" HorizontalOptions="Center" />
+                    <Label Text="Cuota" FontAttributes="Bold" Grid.Row="0" Grid.Column="1" HorizontalOptions="Center" />
+                    <Label Text="Avance" FontAttributes="Bold" Grid.Row="0" Grid.Column="2" HorizontalOptions="Center" />
+                    <Label Text="Porcentaje" FontAttributes="Bold" Grid.Row="0" Grid.Column="3" HorizontalOptions="Center" />
+                    <!-- Data Rows -->
+                    <ListView x:Name="AvancesListView" Grid.Row="1" Grid.ColumnSpan="6">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding Linea}" VerticalOptions="Center" Grid.Column="0" HorizontalOptions="Center" />
+                                        <Label Text="{Binding Cuota, StringFormat='{0:N2}'}" VerticalOptions="Center" Grid.Column="1" HorizontalOptions="End" />
+                                        <Label Text="{Binding Avance, StringFormat='{0:N2}'}" VerticalOptions="Center" Grid.Column="2" HorizontalOptions="End" />
+                                        <Label Text="{Binding Porcentaje, StringFormat='{0:N2}'}" VerticalOptions="Center" Grid.Column="3" HorizontalOptions="End" />
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </ScrollView>
+            <Button Text="Cerrar" Command="{Binding CloseCommand}" HorizontalOptions="Center" BackgroundColor="#FF6961" TextColor="White" CornerRadius="5" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
